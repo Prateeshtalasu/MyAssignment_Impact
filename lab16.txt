@@ -1,0 +1,37 @@
+
+CREATE TYPE B12.AllergyEffect AS
+(
+	allergyReaction Varchar(50),
+	commentByPractioner varchar(100)
+
+);
+
+
+CREATE TYPE B12.AllergyDetails AS
+(
+	allergicTo varchar(30),
+	allergicSince date,
+	alllergyEffects B12.AllergyEffect
+);
+
+CREATE TABLE B12.PatientData
+(
+	patientID INT GENERATED ALWAYS AS IDENTITY primary key,
+	PatientName Varchar(30),
+	contactNo TEXT[],
+	allergicTo B12.AllergyDetails
+
+);
+
+
+insert into B12.PatientData (patientName, contactNo, allergicTo) VALUES
+('JACK', '{"345678","876543","23211123"}',
+('grass','2016-08-13',('Over Sneezing','Use lotion as Body cover'))
+);
+
+insert into B12.PatientData (patientName, contactNo, allergicTo) VALUES
+('JULIE', '{"22222","33333"}',
+('Dust','2011-02-19',('red, etchy, watery eyes','wear glasses and user drops'))
+);
+
+SELECT * FROM B12.PatientData

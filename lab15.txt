@@ -1,0 +1,22 @@
+
+-create table B12.CopyProduct as
+table production.product;  *\
+--------------------------------------------
+do $$ 
+declare
+readCur1 CURSOR FOR select * from B12.Copyproduct; 
+productCheck B12.Copyproduct%rowtype; 
+begin
+OPEN readCur1;
+loop
+FETCH readCur1 into productCheck;
+exit when not found;
+if(productCheck.productCost<20000) then
+update B12.Copyproduct set productCost=20000 where productId=productCheck.productId;
+end if;
+RAISE NOTICE '------------------------------------------';
+RAISE NOTICE 'PRODUCT DETAILS ARE: % % %', productCheck.productid, productCheck.productName,productCheck.productCost;	
+RAISE NOTICE '------------------------------------------';
+end loop;
+close readCur1;
+end; $$
