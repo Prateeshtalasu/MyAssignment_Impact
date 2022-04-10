@@ -1,4 +1,4 @@
-
+??impact12??
 -create table B12.CopyProduct as
 table production.product;  *\
 --------------------------------------------
